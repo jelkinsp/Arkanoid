@@ -1,6 +1,7 @@
 package screen;
 
 import base.GamePanel;
+import sprites.LoadImage;
 import sprites.Sprite;
 
 import javax.imageio.ImageIO;
@@ -24,6 +25,7 @@ public class GameScreen implements IScreen {
 
     GamePanel gamePanel;
 
+    LoadImage loadImage = new LoadImage();
     BufferedImage bufferedImage;
     Image imageScaling;
 
@@ -45,6 +47,7 @@ public class GameScreen implements IScreen {
 
         try {
             bufferedImage = ImageIO.read(new File("image/Background.png"));
+            bufferedImage = loadImage.getBackgroundBuffer();
         } catch (IOException e) {
             e.printStackTrace();
         }

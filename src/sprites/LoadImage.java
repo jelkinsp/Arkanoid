@@ -2,6 +2,7 @@ package sprites;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -63,7 +64,7 @@ public class LoadImage {
      */
     private void initializeSpritesSubBuffer() {
         try {
-            this.spritesBuffer = ImageIO.read(getClass().getResource("/image/spritesArkanoid.png"));
+            this.spritesBuffer = ImageIO.read(new File("image/spritesArkanoid.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,7 +88,7 @@ public class LoadImage {
      */
     private void initializeBackgroundBuffer() {
         try {
-            this.backgroundBuffer = ImageIO.read(getClass().getResource("/image/Background.png"));
+            this.backgroundBuffer = ImageIO.read(new File("image/Background.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -142,5 +143,53 @@ public class LoadImage {
                     WIDTH_BLOCK,
                     HEIGHT_BLOCK);
         }
+    }
+
+    public static int getHeightBlock() {
+        return HEIGHT_BLOCK;
+    }
+
+    public static int getWidthBlock() {
+        return WIDTH_BLOCK;
+    }
+
+    public static int getHeightBall() {
+        return HEIGHT_BALL;
+    }
+
+    public static int getWidthBall() {
+        return WIDTH_BALL;
+    }
+
+    public static int getHeightBarShip() {
+        return HEIGHT_BAR_SHIP;
+    }
+
+    public static int getWidthBarShip() {
+        return WIDTH_BAR_SHIP;
+    }
+
+    public BufferedImage getBallSubBuffer() {
+        return ballSubBuffer;
+    }
+
+    public BufferedImage getLiveUpSubBuffer() {
+        return liveUpSubBuffer;
+    }
+
+    public BufferedImage getBackgroundBuffer() {
+        return backgroundBuffer;
+    }
+
+    public BufferedImage[] getBarShipSubBuffer() {
+        return barShipSubBuffer;
+    }
+
+    public BufferedImage[] getBarShipDestroidSubBuffer() {
+        return barShipDestroidSubBuffer;
+    }
+
+    public BufferedImage[] getBlockSubBuffer() {
+        return blockSubBuffer;
     }
 }
