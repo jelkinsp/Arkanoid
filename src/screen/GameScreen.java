@@ -42,17 +42,14 @@ public class GameScreen implements IScreen {
 
     public void initWindow() {
         cont = 0;
-        ball = new Sprite(SIZE_BALL, SIZE_BALL, 300, gamePanel.getHeight()-100, 0, 0, "image/EnergyBall.png");
+        ball = new Sprite(20, 20, 300, gamePanel.getHeight()-100, 0, 0, loadImage.getBallSubBuffer());
 
-
-        try {
-            bufferedImage = ImageIO.read(new File("image/Background.png"));
             bufferedImage = loadImage.getBackgroundBuffer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        bar = new Sprite(WIDTH_BAR, HEIGH_BAR, 300, gamePanel.getHeight()-50, "image/SpaceBar.png");
+        bar = new Sprite(100, 33, 300, gamePanel.getHeight()-50, loadImage.getBarShipSubBuffer()[0]);
         fontTimer = new Font("Arial", Font.BOLD, 20);
         rescaleImage();
     }

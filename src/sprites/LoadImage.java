@@ -16,24 +16,24 @@ public class LoadImage {
     //Bloques
     private final static int POSITION_X_BLOCK = 0;
     private final static int POSITION_Y_BLOCK = 0;
+    private final static int WIDTH_BLOCK = 16;
     private final static int HEIGHT_BLOCK = 8;
-    private final static int WIDTH_BLOCK = 160;
     //Bola de energia
     private final static int POSITION_X_BALL = 0;
     private final static int POSITION_Y_BALL = 12;
-    private final static int HEIGHT_BALL_SPRITE = 9;
     private final static int WIDTH_BALL_SPRITE = 9;
+    private final static int HEIGHT_BALL_SPRITE = 9;
     //bola sin sombra.
-    private final static int HEIGHT_BALL = 5;
     private final static int WIDTH_BALL = 5;
+    private final static int HEIGHT_BALL = 5;
     //Nave
     private final static int POSITION_X_BAR_SHIP = 0;
     private final static int POSITION_Y_BAR_SHIP = 25;
-    private final static int HEIGHT_BAR_SHIP_SPRITE = 36;
-    private final static int WIDTH_BAR_SHIP_SPRITE = 12;
+    private final static int WIDTH_BAR_SHIP_SPRITE = 36;
+    private final static int HEIGHT_BAR_SHIP_SPRITE = 12;
     //Nave sin sombra.
-    private final static int HEIGHT_BAR_SHIP = 32;
-    private final static int WIDTH_BAR_SHIP = 8;
+    private final static int WIDTH_BAR_SHIP = 32;
+    private final static int HEIGHT_BAR_SHIP = 8;
     //Distacia entre las nave dentro de la imagen principal
     private final static int SIZE_BETWEEN_BAR_SHIP = 5;
 
@@ -116,10 +116,10 @@ public class LoadImage {
      */
     private void initializeShipDestroidBuffer() {
         this.barShipDestroidSubBuffer = new BufferedImage[4];
-        this.barShipSubBuffer[0] = this.spritesBuffer.getSubimage(0, 44, 36, 13);
-        this.barShipSubBuffer[1] = this.spritesBuffer.getSubimage(41, 41, 30, 16);
-        this.barShipSubBuffer[2] = this.spritesBuffer.getSubimage(82, 41, 32, 16);
-        this.barShipSubBuffer[3] = this.spritesBuffer.getSubimage(123, 43, 30, 14);
+        this.barShipDestroidSubBuffer[0] = this.spritesBuffer.getSubimage(0, 44, 36, 13);
+        this.barShipDestroidSubBuffer[1] = this.spritesBuffer.getSubimage(41, 41, 30, 16);
+        this.barShipDestroidSubBuffer[2] = this.spritesBuffer.getSubimage(82, 41, 32, 16);
+        this.barShipDestroidSubBuffer[3] = this.spritesBuffer.getSubimage(123, 43, 30, 14);
     }
 
     /**

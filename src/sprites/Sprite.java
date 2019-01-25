@@ -1,9 +1,8 @@
 package sprites;
 
-import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 /**
  * @author Jose Luis Luengo Ramos
@@ -23,7 +22,7 @@ public class Sprite {
     private int velocidadX;
     private int velocidadY;
     //Ruta de la imagen
-    private String rutaImagen;
+    private BufferedImage bufferedImage;
 
 
     /**
@@ -34,12 +33,12 @@ public class Sprite {
      * @param posX  posición horizontal del sprite en el mundo.
      * @param posY  posición vertical del Sprite en el mundo. El origen se sitúa en la parte superior.
      */
-    public Sprite(int ancho, int alto, int posX, int posY, String rutaImagen) {
+    public Sprite(int ancho, int alto, int posX, int posY, BufferedImage bufferedImage) {
         this.ancho = ancho;
         this.alto = alto;
         this.posX = posX;
         this.posY = posY;
-        this.rutaImagen = rutaImagen;
+        this.bufferedImage = bufferedImage;
         actualizarBuffer();
     }
 
@@ -53,27 +52,28 @@ public class Sprite {
      * @param velocidadX velocidad horizontal del Sprite.
      * @param velocidadY velocidad vertical del Sprite.
      */
-    public Sprite(int ancho, int alto, int posX, int posY, int velocidadX, int velocidadY, String rutaImagen) {
+    public Sprite(int ancho, int alto, int posX, int posY, int velocidadX, int velocidadY, BufferedImage bufferedImage) {
         this.ancho = ancho;
         this.alto = alto;
         this.posX = posX;
         this.posY = posY;
         this.velocidadX = velocidadX;
         this.velocidadY = velocidadY;
-        this.rutaImagen = rutaImagen;
+        this.bufferedImage = bufferedImage;
         actualizarBuffer();
     }
 
     /**
      * Método para actualizar el buffer que guarda cada Sprite.
      * Por ahora sólo guarda un bufferedImage que está completamente relleno de un color.
+     *
      */
     public void actualizarBuffer() {
         buffer = new BufferedImage(ancho, alto, BufferedImage.TYPE_INT_ARGB);
         Graphics g = buffer.getGraphics();
 
         try {
-            BufferedImage imagenSprite = ImageIO.read(new File(rutaImagen));
+            BufferedImage imagenSprite = bufferedImage;
             //pinto en el buffer la imagen
             g.drawImage(imagenSprite.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH), 0, 0, null);
 
@@ -93,39 +93,7 @@ public class Sprite {
      * @return verdadero si ambos Sprites colisionan.
      */
     public boolean colisionan(Sprite other) {
-
-        boolean colisionAncho = false;
-        boolean colisionAlto = false;
-//        int top, right, bottom, left;
-//        int top2, right2, bottom2, left2;
-//
-//        top = ancho;
-//        right = alto;
-//        bottom = ancho;
-//        left = alto;
-//
-//        top2 = otroSprite.getAncho();
-//        right2 = otroSprite.getAlto();
-//        bottom2 = otroSprite.getAncho();
-//        left2 = otroSprite.getAlto();
-//
-//        Rectangle r1 = new Rectangle(posX, posY,ancho, alto);
-//        Rectangle r2 = new Rectangle(posX, posY, ancho, alto);
-//
-//        return r2.intersects(r1);
-        //Checkeamos si comparten algún espacio a lo ancho:
-//        if (posX <=  otroSprite.getPosX()) { //El Sprite actual se encuentra más cerca del eje de las X.
-//            colisionAncho = posX + ancho >= otroSprite.getPosX();
-//        } else { //El otro Sprite se encuentra más cerca del eje de las X.
-//            colisionAncho = otroSprite.getPosX() + otroSprite.getAncho() >= posX;
-//        }
-//
-//        if (posY <= otroSprite.getPosY()) {
-//            colisionAlto = posY - alto > otroSprite.getPosY();
-//        } else {
-//            colisionAlto = otroSprite.getAlto() > posY - otroSprite.getPosY();
-//        }
-//        return colisionAncho && colisionAlto;
+        //Todo: Ajustar los tamaños para que el sprite revote sin la sombra
         int thisCenterX = this.getPosX() + this.getAncho() / 2;
         int thisCenterY = this.getPosY() + this.getAlto() / 2;
         int otherCenterX = other.getPosX() + other.getAncho() / 2;
