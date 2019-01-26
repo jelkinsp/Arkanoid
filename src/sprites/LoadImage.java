@@ -14,26 +14,32 @@ import java.io.IOException;
 public class LoadImage {
 
     //Bloques
-    private final static int POSITION_X_BLOCK = 0;
-    private final static int POSITION_Y_BLOCK = 0;
-    private final static int WIDTH_BLOCK = 16;
-    private final static int HEIGHT_BLOCK = 8;
+    public final static int POSITION_X_BLOCK = 0;
+    public final static int POSITION_Y_BLOCK = 0;
+    public final static int WIDTH_BLOCK = 16;
+    public final static int HEIGHT_BLOCK = 8;
     //Bola de energia
-    private final static int POSITION_X_BALL = 0;
-    private final static int POSITION_Y_BALL = 12;
-    private final static int WIDTH_BALL_SPRITE = 9;
-    private final static int HEIGHT_BALL_SPRITE = 9;
+    public final static int POSITION_X_BALL = 0;
+    public final static int POSITION_Y_BALL = 12;
+    public final static int WIDTH_BALL_SPRITE = 9;
+    public final static int HEIGHT_BALL_SPRITE = 9;
     //bola sin sombra.
-    private final static int WIDTH_BALL = 5;
-    private final static int HEIGHT_BALL = 5;
+    public final static int WIDTH_BALL = 5;
+    public final static int HEIGHT_BALL = 5;
     //Nave
-    private final static int POSITION_X_BAR_SHIP = 0;
-    private final static int POSITION_Y_BAR_SHIP = 25;
-    private final static int WIDTH_BAR_SHIP_SPRITE = 36;
-    private final static int HEIGHT_BAR_SHIP_SPRITE = 12;
+    public final static int POSITION_X_BAR_SHIP = 0;
+    public final static int POSITION_Y_BAR_SHIP = 25;
+    public final static int WIDTH_BAR_SHIP_SPRITE = 108;
+    public final static int HEIGHT_BAR_SHIP_SPRITE = 36;
     //Nave sin sombra.
-    private final static int WIDTH_BAR_SHIP = 32;
-    private final static int HEIGHT_BAR_SHIP = 8;
+    public final static int WIDTH_BAR_SHIP = 96;
+    public final static int HEIGHT_BAR_SHIP = 24;//Nave
+
+    public final static int ORIG_WIDTH_BAR_SHIP_SPRITE = 36;
+    public final static int ORIG_HEIGHT_BAR_SHIP_SPRITE = 12;
+    //Nave sin sombra.
+    public final static int ORIG_WIDTH_BAR_SHIP = 32;
+    public final static int ORIG_HEIGHT_BAR_SHIP = 8;
     //Distacia entre las nave dentro de la imagen principal
     private final static int SIZE_BETWEEN_BAR_SHIP = 5;
 
@@ -102,10 +108,10 @@ public class LoadImage {
         this.barShipSubBuffer = new BufferedImage[4];
         for (int i = 0; i < this.barShipSubBuffer.length; i++) {
             this.barShipSubBuffer[i] = this.spritesBuffer.getSubimage(
-                    POSITION_X_BAR_SHIP + ((SIZE_BETWEEN_BAR_SHIP + WIDTH_BAR_SHIP_SPRITE) * i),
+                    POSITION_X_BAR_SHIP + ((SIZE_BETWEEN_BAR_SHIP + ORIG_WIDTH_BAR_SHIP_SPRITE) * i),
                     POSITION_Y_BAR_SHIP,
-                    WIDTH_BAR_SHIP_SPRITE,
-                    HEIGHT_BAR_SHIP_SPRITE
+                    ORIG_WIDTH_BAR_SHIP_SPRITE,
+                    ORIG_HEIGHT_BAR_SHIP_SPRITE
             );
         }
     }

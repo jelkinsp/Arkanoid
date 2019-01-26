@@ -14,11 +14,8 @@ import java.awt.image.BufferedImage;
  * @author Jose Luis Luengo Ramos
  */
 public class GameScreen implements IScreen {
-    private static final int SIZE_BALL = 15;
-    private static final int WIDTH_BAR = 180;
-    private static final int HEIGH_BAR = 21;
     private static final Color COLOR_SCORE = Color.WHITE;
-    private static final Color COLOR_DISPARO = Color.GREEN;
+
 
     GamePanel gamePanel;
     LoadImage loadImage;
@@ -61,7 +58,7 @@ public class GameScreen implements IScreen {
             }
         }
 
-        bar = new Sprite(100, 33, 300, gamePanel.getHeight() - 50, loadImage.getBarShipSubBuffer()[0]);
+        bar = new Sprite(LoadImage.WIDTH_BAR_SHIP_SPRITE, LoadImage.HEIGHT_BAR_SHIP_SPRITE, 300, gamePanel.getHeight() - 50, loadImage.getBarShipSubBuffer()[0]);
         fontTimer = new Font("Arial", Font.BOLD, 20);
         rescaleImage();
     }
@@ -113,16 +110,17 @@ public class GameScreen implements IScreen {
         //Comprobar colisiones con el bar
 
         if (ball.colisionan(bar)) {
-            if (ball.getVelocidadX() > 0) {
-                ball.setVelocidadX(-1 * Math.abs(ball.getVelocidadX()));
-            } else {
-                ball.setVelocidadX(Math.abs(ball.getVelocidadX()));
-            }
-            if (ball.getVelocidadY() > 0) {
-                ball.setVelocidadY(-1 * Math.abs(ball.getVelocidadY()));
-            } else {
-                ball.setVelocidadY(Math.abs(ball.getVelocidadY()));
-            }
+            double centerDistance = (ball.getPosX() + ball.getAncho() / 2d) - (bar.getPosX() + LoadImage.WIDTH_BAR_SHIP / 2d);
+            double impactCof = centerDistance / (LoadImage.WIDTH_BAR_SHIP / 2d);
+            double vT = ball.getTotalSpeed();
+            double maxAngle = Math.toRadians(60);
+            double angle = Math.PI/2 - maxAngle * Math.abs(impactCof);
+            double newVX = vT * Math.cos(angle) * ((centerDistance > 0) ? 1 : -1);
+            double newVY = vT * Math.sin(angle);
+            System.out.println(impactCof+"\t"+Math.toDegrees(angle));
+
+            ball.setVelocidadX(newVX);
+            ball.setVelocidadY(- newVY);
         }
     }
 
@@ -134,9 +132,10 @@ public class GameScreen implements IScreen {
                 if (ball.colisionan(blocks[i][j])) {
                     Sprite bloque = blocks[i][j];
                     if (Math.abs(ball.getPosX() - bloque.getPosX()) < ((ball.getAncho() + bloque.getAncho()) / 2)) {
-                        ball.setVelocidadY( - ball.getVelocidadY());
-                    } else if (Math.abs(ball.getPosY() - bloque.getPosY()) < ((ball.getAlto() + bloque.getAlto()) / 2)) {
-                        ball.setVelocidadX( - ball.getVelocidadX());
+                        ball.setVelocidadY(-ball.getVelocidadY());
+                    }
+                    if (Math.abs(ball.getPosY() - bloque.getPosY()) < ((ball.getAlto() + bloque.getAlto()) / 2)) {
+                        ball.setVelocidadX(-ball.getVelocidadX());
                     }
 //                    if (ball.getVelocidadX() > 0) {
 //                        ball.setVelocidadX(-1 * Math.abs(ball.getVelocidadX()));
@@ -165,7 +164,7 @@ public class GameScreen implements IScreen {
 
 
     public void moveMouse(MouseEvent e) {
-        bar.setPosX(e.getX() - bar.getAncho() / 2);
+        bar.setPosX(e.getX() - LoadImage.WIDTH_BAR_SHIP / 2);
         bar.setPosY(gamePanel.getHeight() - 50);
 
     }
@@ -174,8 +173,9 @@ public class GameScreen implements IScreen {
     public void clickMouse(MouseEvent e) {
         cont++;
         if (cont == 1) {
-            ball.setVelocidadX(3);
-            ball.setVelocidadY(9);
+            ball.setTotalSpeed(8);
+            ball.setVelocidadX(ball.getTotalSpeed() * Math.cos(Math.toRadians(60)));
+            ball.setVelocidadY(ball.getTotalSpeed() * Math.sin(Math.toRadians(60)) * -1);
         }
 //        if (asteroides.size() > 4) {
 //

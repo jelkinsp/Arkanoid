@@ -16,11 +16,12 @@ public class Sprite {
     private int ancho;
     private int alto;
     //Variables de colocación
-    private int posX;
-    private int posY;
+    private double posX;
+    private double posY;
     //Variables para la velocidad
-    private int velocidadX;
-    private int velocidadY;
+    private double totalSpeed;
+    private double velocidadX;
+    private double velocidadY;
     //Ruta de la imagen
     private BufferedImage bufferedImage;
 
@@ -66,7 +67,6 @@ public class Sprite {
     /**
      * Método para actualizar el buffer que guarda cada Sprite.
      * Por ahora sólo guarda un bufferedImage que está completamente relleno de un color.
-     *
      */
     public void actualizarBuffer() {
         buffer = new BufferedImage(ancho, alto, BufferedImage.TYPE_INT_ARGB);
@@ -103,14 +103,14 @@ public class Sprite {
 //        boolean overlapY = Math.abs(thisCenterY - otherCenterY) <= (this.getAlto() + other.getAlto()) / 2;
 //
 //        return (overlapX && overlapY);  
-        
-        int thisCenterX = this.getPosX() + (this.getAncho()-4) / 2;
-        int thisCenterY = this.getPosY() + (this.getAlto()-4) / 2;
-        int otherCenterX = other.getPosX() + other.getAncho() / 2;
-        int otherCenterY = other.getPosY() + other.getAlto() / 2;
 
-        boolean overlapX = Math.abs(thisCenterX - otherCenterX) <= ((this.getAncho()-4) + other.getAncho()) / 2;
-        boolean overlapY = Math.abs(thisCenterY - otherCenterY) <= ((this.getAlto()-4) + other.getAlto()) / 2;
+        double thisCenterX = this.getPosX() + (this.getAncho() - 4) / 2;
+        double thisCenterY = this.getPosY() + (this.getAlto() - 4) / 2;
+        double otherCenterX = other.getPosX() + other.getAncho() / 2;
+        double otherCenterY = other.getPosY() + other.getAlto() / 2;
+
+        boolean overlapX = Math.abs(thisCenterX - otherCenterX) <= ((this.getAncho() - 4) + other.getAncho()) / 2;
+        boolean overlapY = Math.abs(thisCenterY - otherCenterY) <= ((this.getAlto() - 4) + other.getAlto()) / 2;
 
         return (overlapX && overlapY);
     }
@@ -152,11 +152,18 @@ public class Sprite {
      * @param g Es el Graphics del mundo que se utilizará para pintar el Sprite.
      */
     public void pintarSpriteEnMundo(Graphics g) {
-        g.drawImage(buffer, posX, posY, null);
+        g.drawImage(buffer, (int) Math.round(posX), (int) Math.round(posY), null);
 //        g.fillRect(posX,posY,ancho,alto);
 
     }
 
+    public double getTotalSpeed() {
+        return totalSpeed;
+    }
+
+    public void setTotalSpeed(double totalSpeed) {
+        this.totalSpeed = totalSpeed;
+    }
 
     //Métodos para obtener:
     public int getAncho() {
@@ -167,11 +174,11 @@ public class Sprite {
         return alto;
     }
 
-    public int getPosX() {
+    public double getPosX() {
         return posX;
     }
 
-    public int getPosY() {
+    public double getPosY() {
         return posY;
     }
 
@@ -179,11 +186,11 @@ public class Sprite {
         return buffer;
     }
 
-    public int getVelocidadX() {
+    public double getVelocidadX() {
         return velocidadX;
     }
 
-    public int getVelocidadY() {
+    public double getVelocidadY() {
         return velocidadY;
     }
 
@@ -197,11 +204,11 @@ public class Sprite {
         this.alto = alto;
     }
 
-    public void setPosX(int posX) {
+    public void setPosX(double posX) {
         this.posX = posX;
     }
 
-    public void setPosY(int posY) {
+    public void setPosY(double posY) {
         this.posY = posY;
     }
 
@@ -209,11 +216,11 @@ public class Sprite {
         this.buffer = buffer;
     }
 
-    public void setVelocidadX(int velocidadX) {
+    public void setVelocidadX(double velocidadX) {
         this.velocidadX = velocidadX;
     }
 
-    public void setVelocidadY(int velocidadY) {
+    public void setVelocidadY(double velocidadY) {
         this.velocidadY = velocidadY;
     }
 

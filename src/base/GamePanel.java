@@ -65,7 +65,6 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
 
         while (true) {
 
-                repaint();
 
             try {
                 Thread.sleep(16);
@@ -74,8 +73,8 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
                 e.printStackTrace();
             }
 
-
             IScreenActual.executeFrame();
+            repaint();
             Toolkit.getDefaultToolkit().sync();
         }
     }

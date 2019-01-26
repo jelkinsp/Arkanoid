@@ -22,7 +22,7 @@ public class WindowMain {
         window = new JFrame();
         window.setBounds(100, 50, 633, 684);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        window.setResizable(false);
 
     }
 
