@@ -69,6 +69,7 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
 
             try {
                 Thread.sleep(16);
+//                Thread.sleep(60);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

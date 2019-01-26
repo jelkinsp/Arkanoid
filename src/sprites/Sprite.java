@@ -94,13 +94,23 @@ public class Sprite {
      */
     public boolean colisionan(Sprite other) {
         //Todo: Ajustar los tamaños para que el sprite revote sin la sombra
-        int thisCenterX = this.getPosX() + this.getAncho() / 2;
-        int thisCenterY = this.getPosY() + this.getAlto() / 2;
+//        int thisCenterX = this.getPosX() + this.getAncho() / 2;
+//        int thisCenterY = this.getPosY() + this.getAlto() / 2;
+//        int otherCenterX = other.getPosX() + other.getAncho() / 2;
+//        int otherCenterY = other.getPosY() + other.getAlto() / 2;
+//
+//        boolean overlapX = Math.abs(thisCenterX - otherCenterX) <= (this.getAncho() + other.getAncho()) / 2;
+//        boolean overlapY = Math.abs(thisCenterY - otherCenterY) <= (this.getAlto() + other.getAlto()) / 2;
+//
+//        return (overlapX && overlapY);  
+        
+        int thisCenterX = this.getPosX() + (this.getAncho()-4) / 2;
+        int thisCenterY = this.getPosY() + (this.getAlto()-4) / 2;
         int otherCenterX = other.getPosX() + other.getAncho() / 2;
         int otherCenterY = other.getPosY() + other.getAlto() / 2;
 
-        boolean overlapX = Math.abs(thisCenterX - otherCenterX) <= (this.getAncho() + other.getAncho()) / 2;
-        boolean overlapY = Math.abs(thisCenterY - otherCenterY) <= (this.getAlto() + other.getAlto()) / 2;
+        boolean overlapX = Math.abs(thisCenterX - otherCenterX) <= ((this.getAncho()-4) + other.getAncho()) / 2;
+        boolean overlapY = Math.abs(thisCenterY - otherCenterY) <= ((this.getAlto()-4) + other.getAlto()) / 2;
 
         return (overlapX && overlapY);
     }
