@@ -74,7 +74,6 @@ public class Sprite {
 
         try {
             BufferedImage imagenSprite = bufferedImage;
-            //pinto en el buffer la imagen
             g.drawImage(imagenSprite.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH), 0, 0, null);
 
         } catch (Exception e) {
@@ -123,6 +122,7 @@ public class Sprite {
      * @param altoMundo  alto del mundo sobre el que se mueve el Sprite
      */
     public void moverSprite(int anchoMundo, int altoMundo) {
+
         if (posX >= anchoMundo - ancho) { //por la derecha
             velocidadX = -1 * Math.abs(velocidadX);
         }

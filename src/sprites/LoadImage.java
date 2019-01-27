@@ -33,8 +33,8 @@ public class LoadImage {
     public final static int HEIGHT_BAR_SHIP_SPRITE = 36;
     //Nave sin sombra.
     public final static int WIDTH_BAR_SHIP = 96;
-    public final static int HEIGHT_BAR_SHIP = 24;//Nave
-
+    public final static int HEIGHT_BAR_SHIP = 24;
+    //Nave
     public final static int ORIG_WIDTH_BAR_SHIP_SPRITE = 36;
     public final static int ORIG_HEIGHT_BAR_SHIP_SPRITE = 12;
     //Nave sin sombra.

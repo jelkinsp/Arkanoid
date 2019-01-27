@@ -1,10 +1,12 @@
 package screen;
 
 import base.GamePanel;
+import base.ScoreHeader;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -23,9 +25,11 @@ public class InitScreen implements IScreen {
     Font initFont;
     //Inicio pantalla
     Color textColor = Color.YELLOW;
+    private ScoreHeader scoreHeader;
 
 
-    public InitScreen(GamePanel gamePanel) {
+    public InitScreen(GamePanel gamePanel/*, ScoreHeader scoreHeader*/) {
+
         this.gamePanel = gamePanel;
     }
 
@@ -41,8 +45,6 @@ public class InitScreen implements IScreen {
 
 
     public void paintWindow(Graphics g) {
-
-
         g.drawImage(imageScalingStart, 0, 0, null);
         g.setColor(textColor);
         g.setFont(initFont);
@@ -72,7 +74,7 @@ public class InitScreen implements IScreen {
     public void clickMouse(MouseEvent e) {
         GameScreen gameScreen = new GameScreen(gamePanel);
         gameScreen.initWindow();
-        gamePanel.setIScreenActual(gameScreen);
+        gamePanel.setScreenActual(gameScreen);
 
     }
 
@@ -81,6 +83,15 @@ public class InitScreen implements IScreen {
         imageScalingStart = bufferedImage.getScaledInstance(gamePanel.getWidth(), gamePanel.getHeight(), Image.SCALE_SMOOTH);
 
 
+    }
+
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent e) {
+        return false;
     }
 
 }
