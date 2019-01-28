@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
 /**
  * @author Jose Luis Luengo Ramos
  * Clase GamePanel. Controla los gráficos del Juego. Por ahora también controla la lógica del Juego.
@@ -16,14 +15,12 @@ import java.awt.event.*;
  * Implementa Runnable porque en el constructor se lanza un hilo que permite actualizar el Juego periódicamente.
  * Implementa MouseListener para que pueda capturar las pulsaciones del ratón.
  */
-public class GamePanel extends JPanel implements Runnable, MouseListener, ComponentListener, MouseMotionListener, KeyListener{
+public class GamePanel extends JPanel implements Runnable, MouseListener, ComponentListener, KeyListener{
 
     private static final long serialVersionUID = 1L;
     IScreen screenActual;
     ScoreHeader scoreHeader;
     LoadMedia loadMedia;
-
-
 
     /**
      * Constructor de GamePanel.
@@ -34,16 +31,12 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
      */
     public GamePanel(ScoreHeader scoreHeader, LoadMedia loadMedia) {
         this.loadMedia = loadMedia;
-
         this.addMouseListener(this);
         this.addComponentListener(this);
-        this.addMouseMotionListener(this);
         this.addKeyListener(this);
         new Thread(this).start();
         this.scoreHeader = scoreHeader;
-
         this.setFocusable(true);
-
         this.screenActual = new InitScreen(this);
         this.screenActual.initWindow();
     }
@@ -52,24 +45,22 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
         this.screenActual = screenActual;
     }
 
-
     /**
      * Sobreescritura del método paintComponent. Este método se llama automáticamente cuando se inicia el componente,
      * se redimensiona o bien cuando se llama al método "repaint()". Nunca llamarlo directamente.
      *
      * @param g Es un Graphics que nos proveé JPanel para poner pintar el componente a nuestro antojo.
      */
-
+    @Override
     public void paintComponent(Graphics g) {
         screenActual.paintWindow(g);
         this.scoreHeader.repaint();
     }
 
+    @Override
     public void run() {
             scoreHeader.getScreenActual().readFile();
         while (true) {
-
-
             try {
                 Thread.sleep(10);
 //                Thread.sleep(60);
@@ -77,56 +68,55 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
                 e.printStackTrace();
             }
             screenActual.executeFrame();
-
             repaint();
             Toolkit.getDefaultToolkit().sync();
         }
     }
 
+    @Override
     public void mouseClicked(MouseEvent e) {
         // TODO Auto-generated method stub
     }
 
+    @Override
     public void mousePressed(MouseEvent e) {
         screenActual.clickMouse(e);
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
         // TODO Auto-generated method stub
     }
 
+    @Override
     public void mouseEntered(MouseEvent e) {
         // TODO Auto-generated method stub
     }
 
+    @Override
     public void mouseExited(MouseEvent e) {
         // TODO Auto-generated method stub
     }
 
+    @Override
     public void componentResized(ComponentEvent e) {
         screenActual.resizeScreen(e);
     }
 
+    @Override
     public void componentMoved(ComponentEvent e) {
         // TODO Auto-generated method stub
     }
 
+    @Override
     public void componentShown(ComponentEvent e) {
         // TODO Auto-generated method stub
     }
 
+    @Override
     public void componentHidden(ComponentEvent e) {
         // TODO Auto-generated method stub
     }
-
-    public void mouseDragged(MouseEvent e) {
-        // TODO Auto-generated method stub
-    }
-
-    public void mouseMoved(MouseEvent e) {
-//        screenActual.moveMouse(e);
-    }
-
 
     public void keyTyped(KeyEvent e) {
 
@@ -143,10 +133,6 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
 
     public LoadMedia getLoadMedia() {
         return loadMedia;
-    }
-
-    public void setLoadMedia(LoadMedia loadMedia) {
-        this.loadMedia = loadMedia;
     }
 
     public ScoreHeader getScoreHeader() {

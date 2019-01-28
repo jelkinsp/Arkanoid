@@ -2,7 +2,10 @@ package main;
 
 import java.awt.*;
 
-
+/**
+ *
+ * Clase principal
+ */
 public class Main {
 
 	public static void main(String[] args) {

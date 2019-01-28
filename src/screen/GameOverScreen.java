@@ -16,27 +16,24 @@ import java.io.File;
 
 
 /**
+ * Pantalla de juego perdido
+ *
  * @author Jose Luis Luengo Ramos
  */
 public class GameOverScreen implements IScreen {
-    @FXML
-    MediaView mediaView;
-
     GamePanel gamePanel;
     Font initFont;
     Color textColor = Color.WHITE;
-
     public GameOverScreen(GamePanel gamePanel) {
-
         this.gamePanel = gamePanel;
     }
 
-
+    @Override
     public void initWindow() {
         initFont = this.gamePanel.getLoadMedia().getMainFont().deriveFont(Font.PLAIN, 18);
     }
 
-
+    @Override
     public void paintWindow(Graphics g) {
         BufferedImage gameover = gamePanel.getLoadMedia().getSpritesInitSubBuffer()[2];
         g.setColor(new Color(0, 0, 0));
@@ -61,60 +58,21 @@ public class GameOverScreen implements IScreen {
     }
 
 
+    @Override
     public void executeFrame() {
-//        if (contadorColorFrames % CAMBIO_COLOR_INICIO == 0) {
-//
-//            if (textColor.equals(Color.YELLOW)) {
-//                textColor = Color.RED;
-//            } else {
-//                textColor = Color.YELLOW;
-//            }
-//        }
-
     }
 
 
-    public void moveMouse(MouseEvent e) {
-
-    }
-
-
+    @Override
     public void clickMouse(MouseEvent e) {
-
-//        playMovie();
-
-
         InitScreen initScreen = new InitScreen(gamePanel);
         initScreen.initWindow();
         gamePanel.setScreenActual(initScreen);
 
     }
 
-    public void playMovie() {
-
-//        String url = "initGameVideo.mp4";
-        String url = "media/initGameVideo.mp4";
-        Media media = null;
-        media = new Media(new File(url).getPath());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaView.setFitWidth(gamePanel.getWidth());
-        mediaView.setFitHeight(gamePanel.getHeight());
-//        mediaView.setFitWidth(600);
-//        mediaView.setFitHeight(600);
-        mediaView.setMediaPlayer(mediaPlayer);
-        mediaPlayer.play();
-
-
-    }
-
+    @Override
     public void resizeScreen(ComponentEvent e) {
-//        imageScalingStart = bufferedImage.getScaledInstance(gamePanel.getWidth(), gamePanel.getHeight(), Image.SCALE_SMOOTH);
-
-
-    }
-
-    public void keyPressed(KeyEvent e) {
-
     }
 
     @Override
