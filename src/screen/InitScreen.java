@@ -1,60 +1,60 @@
 package screen;
 
 import base.GamePanel;
-import base.ScoreHeader;
 import sprites.LoadMedia;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
+ * Pantalla principal, aqui se pintan los titulos, los iconos y los texto.
+ *
  * @author Jose Luis Luengo Ramos
  */
 public class InitScreen implements IScreen {
+//    @FXML
+//    MediaView mediaView;
 
     GamePanel gamePanel;
-
-    //    BufferedImage bufferedImage;
-//    Image imageScalingStart;
     Font initFont;
-    //Inicio pantalla
     Color textColor = Color.WHITE;
-    private ScoreHeader scoreHeader;
 
-
-    public InitScreen(GamePanel gamePanel/*, ScoreHeader scoreHeader*/) {
+    public InitScreen(GamePanel gamePanel) {
 
         this.gamePanel = gamePanel;
     }
 
 
     public void initWindow() {
-//        try {
-//            bufferedImage = ImageIO.read(new File("image/FondoInicio3.png"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         initFont = this.gamePanel.getLoadMedia().getMainFont().deriveFont(Font.PLAIN, 18);
     }
 
 
     public void paintWindow(Graphics g) {
+        this.gamePanel.getScoreHeader().getScreenActual().setScore(0);
         BufferedImage title = gamePanel.getLoadMedia().getSpritesInitSubBuffer()[0];
-//        g.drawImage(imageScalingStart, 0, 0, null);
         g.setColor(new Color(0, 0, 0));
         g.fillRect(0, 0, gamePanel.getWidth(), gamePanel.getHeight());
-        g.drawImage(title, (gamePanel.getWidth() / 2) - ((LoadMedia.TITLE_WIDTH + 325) / 2), gamePanel.getHeight() / 8, Math.round(title.getWidth() * 2.5f), Math.round(title.getHeight() * 2.5f), null);
+        g.drawImage(
+                title,
+                (gamePanel.getWidth() / 2) - ((LoadMedia.TITLE_WIDTH + 325) / 2),
+                gamePanel.getHeight() / 8,
+                Math.round(title.getWidth() * 2.5f),
+                Math.round(title.getHeight() * 2.5f),
+                null);
         g.setColor(textColor);
         aligmentText(g);
 
     }
 
+    /**
+     * Añade y alinea al centro los textos del drawString.
+     *
+     * @param g
+     */
     private void aligmentText(Graphics g) {
         FontMetrics metrics = g.getFontMetrics(initFont);
         BufferedImage icon = gamePanel.getLoadMedia().getSpritesInitSubBuffer()[1];
@@ -63,7 +63,6 @@ public class InitScreen implements IScreen {
         int aux;
 //        int y;
         g.setFont(initFont);
-
         word = "PUSH";
         x = gamePanel.getX() + (gamePanel.getWidth() - metrics.stringWidth(word)) / 2;
         aux = x;
@@ -73,16 +72,14 @@ public class InitScreen implements IScreen {
         x = gamePanel.getX() + (gamePanel.getWidth() - metrics.stringWidth(word)) / 2;
         g.drawString(word, x, 400);
         g.drawImage(icon,
-                aux-46,
+                aux - 46,
                 600,
                 icon.getWidth() * 2,
                 icon.getHeight() * 2,
                 null);
-
         word = "© 1986 TAITO CORP JAPAN";
         x = gamePanel.getX() + (gamePanel.getWidth() - metrics.stringWidth(word)) / 2;
         g.drawString(word, x, 700);
-
         word = "ALL RIGHT RESERVED";
         x = gamePanel.getX() + (gamePanel.getWidth() - metrics.stringWidth(word)) / 2;
         g.drawString(word, x, 730);
@@ -109,12 +106,28 @@ public class InitScreen implements IScreen {
 
 
     public void clickMouse(MouseEvent e) {
+//        playMovie();
         GameScreen gameScreen = new GameScreen(gamePanel);
         gameScreen.initWindow();
         gamePanel.setScreenActual(gameScreen);
 
     }
-
+// Reproducir un video
+//    public void playMovie() {
+//
+//        String url = "media/initGameVideo.mp4";
+//        Media media = null;
+//            media = new Media(new File(url).getPath());
+//        MediaPlayer mediaPlayer = new MediaPlayer(media);
+//        mediaView.setFitWidth(gamePanel.getWidth());
+//        mediaView.setFitHeight(gamePanel.getHeight());
+////        mediaView.setFitWidth(600);
+////        mediaView.setFitHeight(600);
+//        mediaView.setMediaPlayer(mediaPlayer);
+//        mediaPlayer.play();
+//
+//
+//    }
 
     public void resizeScreen(ComponentEvent e) {
 //        imageScalingStart = bufferedImage.getScaledInstance(gamePanel.getWidth(), gamePanel.getHeight(), Image.SCALE_SMOOTH);
