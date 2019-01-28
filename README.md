@@ -1,4 +1,4 @@
-# Arkanoid
+﻿# Arkanoid
 Arkanoid **V1.15.0**
 
 ***
@@ -53,6 +53,8 @@ Implementación radianes para el calculo de las direcciones y el control de la b
   -Cambio de formato con el audio
   
   -Refactorizado superficial.
+
+  -Subida a produccion
 
 **v1.10.0**
 * Parcheado el cheque de la barra con las paredes.
