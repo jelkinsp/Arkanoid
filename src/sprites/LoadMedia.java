@@ -1,6 +1,7 @@
 package sprites;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  *
  * @author : Jose Luis Luengo Ramos
  */
-public class LoadImage {
+public class LoadMedia {
 
     //Bloques
     public final static int POSITION_X_BLOCK = 0;
@@ -43,17 +44,27 @@ public class LoadImage {
     //Distacia entre las nave dentro de la imagen principal
     private final static int SIZE_BETWEEN_BAR_SHIP = 5;
 
+    //Fondo
+    private static final int BACKGROUND_POSITION_X = 0;
+    private static final int BACKGROUND_POSITION_Y = 0;
+    private static final int BACKGROUND_HEIGHT = 209;
+    private static final int BACKGROUND_WIDTH = 175;
+    private final static int SIZE_BETWEEN_BACKGROUND_SHIP = 11;
+
 
     private BufferedImage spritesBuffer;
     private BufferedImage ballSubBuffer;
     private BufferedImage liveUpSubBuffer;
     private BufferedImage backgroundBuffer;
+    private BufferedImage[] backgroundSubBuffer;
     private BufferedImage[] barShipSubBuffer;
     private BufferedImage[] barShipDestroidSubBuffer;
     private BufferedImage[] blockSubBuffer;
+    private Font mainFont;
 
 
-    public LoadImage() {
+    public LoadMedia() {
+        initializeFont();
         initializeSpritesSubBuffer();
         initializeBallBuffer();
         initializeBackgroundBuffer();
@@ -61,6 +72,16 @@ public class LoadImage {
         initializeShipDestroidBuffer();
         initializeBlockBuffer();
         initializeLiveUpBuffer();
+    }
+
+    private void initializeFont() {
+            try {
+                mainFont = Font.createFont(Font.TRUETYPE_FONT,new File("fonts/fontPixelArkanoid.ttf"));
+//                        LoadMedia.class.getResourceAsStream("fonts/fontPixelArkanoid.ttf"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
     }
 
 
@@ -78,7 +99,6 @@ public class LoadImage {
 
     /**
      * Inicializa la imagen de la bola
-     *
      */
     private void initializeBallBuffer() {
         this.ballSubBuffer = this.spritesBuffer.getSubimage(
@@ -90,19 +110,27 @@ public class LoadImage {
 
     /**
      * Inicializa la imagen de la fondo
-     *
      */
     private void initializeBackgroundBuffer() {
+        this.backgroundSubBuffer = new BufferedImage[3];
+
         try {
-            this.backgroundBuffer = ImageIO.read(new File("image/Background.png"));
+            this.backgroundBuffer = ImageIO.read(new File("image/spritesBackground.png"));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        for (int i = 0; i < this.backgroundSubBuffer.length; i++) {
+            this.backgroundSubBuffer[i] = this.backgroundBuffer.getSubimage(
+                    BACKGROUND_POSITION_X + ((SIZE_BETWEEN_BACKGROUND_SHIP + BACKGROUND_WIDTH) * i),
+                    BACKGROUND_POSITION_Y,
+                    BACKGROUND_WIDTH,
+                    BACKGROUND_HEIGHT);
         }
     }
 
     /**
      * Inicializa la imagen de la nave
-     *
      */
     private void initializeShipBuffer() {
         this.barShipSubBuffer = new BufferedImage[4];
@@ -111,14 +139,12 @@ public class LoadImage {
                     POSITION_X_BAR_SHIP + ((SIZE_BETWEEN_BAR_SHIP + ORIG_WIDTH_BAR_SHIP_SPRITE) * i),
                     POSITION_Y_BAR_SHIP,
                     ORIG_WIDTH_BAR_SHIP_SPRITE,
-                    ORIG_HEIGHT_BAR_SHIP_SPRITE
-            );
+                    ORIG_HEIGHT_BAR_SHIP_SPRITE);
         }
     }
 
     /**
      * Inicializa la imagen de la nave destruyendose
-     *
      */
     private void initializeShipDestroidBuffer() {
         this.barShipDestroidSubBuffer = new BufferedImage[4];
@@ -130,7 +156,6 @@ public class LoadImage {
 
     /**
      * Inicializa la imagen del icono de la vida
-     *
      */
     private void initializeLiveUpBuffer() {
         this.liveUpSubBuffer = this.spritesBuffer.getSubimage(12, 14, 16, 7);
@@ -149,6 +174,14 @@ public class LoadImage {
                     WIDTH_BLOCK,
                     HEIGHT_BLOCK);
         }
+    }
+
+    public Font getMainFont() {
+        return mainFont;
+    }
+
+    public void setMainFont(Font mainFont) {
+        this.mainFont = mainFont;
     }
 
     public static int getHeightBlock() {
@@ -183,8 +216,8 @@ public class LoadImage {
         return liveUpSubBuffer;
     }
 
-    public BufferedImage getBackgroundBuffer() {
-        return backgroundBuffer;
+    public BufferedImage[] getBackgroundBuffer() {
+        return backgroundSubBuffer;
     }
 
     public BufferedImage[] getBarShipSubBuffer() {

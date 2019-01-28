@@ -13,10 +13,10 @@ import java.io.*;
 public class ScoreScreen implements IScreen {
 
     BufferedImage bufferedImage;
-//    Image imageScaling;
+    //    Image imageScaling;
     private int highScore;
     private int score;
-    private Font font;
+    private Font mainFont;
     private ScoreHeader scoreHeader;
 
     public ScoreScreen(ScoreHeader scoreHeader) {
@@ -27,33 +27,28 @@ public class ScoreScreen implements IScreen {
 
     @Override
     public void initWindow() {
-        try {
-            ImageIO.read(new File("image/blackbackground.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         score = 0;
-        font = new Font("Arial", Font.BOLD, 32);
+
+        this.mainFont = this.scoreHeader.getLoadMedia().getMainFont().deriveFont(Font.BOLD, 32);
     }
 
     @Override
     public void paintWindow(Graphics g) {
-//        g.drawImage(bufferedImage,0,20,null);
-//        g.drawRect(0,0,this.scoreHeader.getWidth(),this.scoreHeader.getHeight());
-        g.setColor(new Color(0,0,0));
-        g.fillRect(0,0,this.scoreHeader.getWidth(),this.scoreHeader.getHeight());
-        g.setFont(font);
+        g.setColor(new Color(0, 0, 0));
+        g.fillRect(0, 0, this.scoreHeader.getWidth(), this.scoreHeader.getHeight());
+        g.setFont(mainFont);
         g.setColor(Color.RED);
-        g.drawString("1UP          HIGH SCORE",this.scoreHeader.getWidth()/5, 30);
+        g.drawString("1UP  HIGH SCORE", 50, 35);
         g.setColor(Color.WHITE);
-        g.drawString(String.valueOf(score),this.scoreHeader.getWidth()/5, 60);
-        g.drawString("                   "+highScore,this.scoreHeader.getWidth()/5, 60);
+        g.drawString(String.valueOf(score), 70, 70);
+        g.drawString(String.valueOf(highScore), 320, 70);
         g.dispose();
     }
 
     @Override
     public void executeFrame() {
-        if (score >= highScore){
+        if (score >= highScore) {
             highScore = score;
         }
     }
@@ -74,7 +69,6 @@ public class ScoreScreen implements IScreen {
     }
 
 
-
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -87,8 +81,8 @@ public class ScoreScreen implements IScreen {
     }
 
 
-    public void addPoint(){
-        score+=100;
+    public void addPoint() {
+        score += 100;
     }
 
     public void readFile() {
@@ -111,6 +105,8 @@ public class ScoreScreen implements IScreen {
             e.printStackTrace();
         }
     }
+
+
 
     public int getHighScore() {
         return highScore;

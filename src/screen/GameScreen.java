@@ -2,11 +2,9 @@ package screen;
 
 import base.BlockGenerator;
 import base.GamePanel;
-import base.ScoreHeader;
-import sprites.LoadImage;
+import sprites.LoadMedia;
 import sprites.Sprite;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
@@ -21,7 +19,7 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
 
 
     GamePanel gamePanel;
-    LoadImage loadImage;
+    LoadMedia loadMedia;
     BufferedImage bufferedImage;
     BufferedImage[][] blockImageStage;
     BlockGenerator blockList;
@@ -32,51 +30,52 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
     Sprite ball;
     Sprite[][] blocks;
 
-    Font fontTimer;
+    static Font mainFont;
     private int cont;
     private boolean[] keysPressed;
+    private int totalblock;
 
     public GameScreen(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         keysPressed = new boolean[2];
+        this.loadMedia = gamePanel.getLoadMedia();
     }
 
 
     public void initWindow() {
-//        this.gameJPanelContainer = new JPanel();
-//        this.mainJPanel = new JPanel();
-//        this.gameJPanelContainer.setBackground(Color.BLACK);
-//        this.mainJPanel.setBackground(Color.BLACK);
-//        this.gameJPanelContainer.setLayout(new GridLayout(1,1));
-//        this.mainJPanel.setLayout(new GridLayout(1,1));
-//        this.gamePanel.setLayout(new GridLayout(2,1));
-//        this.gamePanel.add(this.mainJPanel);
-//        this.gamePanel.add(this.gameJPanelContainer);
-
-        this.loadImage = new LoadImage();
-        this.blockList = new BlockGenerator(this.loadImage.getBlockSubBuffer());
-        this.blocks = new Sprite[13][6];
+        this.totalblock=0;
+        this.blockList = new BlockGenerator(this.loadMedia.getBlockSubBuffer());
+        this.blocks = new Sprite[12][6];
         this.blockImageStage = this.blockList.getStage1();
         cont = 0;
-        ball = new Sprite(20, 20, 300, gamePanel.getHeight() - 100, 0, 0, loadImage.getBallSubBuffer());
+        ball = new Sprite(20, 20, 300, gamePanel.getHeight() - 100, 0, 0, loadMedia.getBallSubBuffer());
 
-        bufferedImage = loadImage.getBackgroundBuffer();
+        bufferedImage = loadMedia.getBackgroundBuffer()[0];
 
         for (int i = 0; i < this.blockImageStage.length; i++) {
             for (int j = 0; j < this.blockImageStage[i].length; j++) {
                 blocks[i][j] = new Sprite(
-                        loadImage.getWidthBlock() * 3,
-                        loadImage.getHeightBlock() * 3,
-                        (loadImage.getWidthBlock() * 3) * i,
-                        (loadImage.getHeightBlock() * 3) * j,
+                        loadMedia.getWidthBlock() * 3,
+                        loadMedia.getHeightBlock() * 3,
+                        ((loadMedia.getWidthBlock() * 3) * i)+23,
+                        ((loadMedia.getHeightBlock() * 3) * j)+96,
                         this.blockImageStage[i][j]);
             }
         }
 
-        bar = new Sprite(LoadImage.WIDTH_BAR_SHIP_SPRITE, LoadImage.HEIGHT_BAR_SHIP_SPRITE, 300, gamePanel.getHeight() - 50, loadImage.getBarShipSubBuffer()[0]);
-        fontTimer = new Font("Arial", Font.BOLD, 20);
+        bar = new Sprite(LoadMedia.WIDTH_BAR_SHIP_SPRITE, LoadMedia.HEIGHT_BAR_SHIP_SPRITE, 300, gamePanel.getHeight() - 70, loadMedia.getBarShipSubBuffer()[0]);
+//        mainFont = new Font("Arial", Font.BOLD, 20);
         rescaleImage();
     }
+//    public static void loadFonts() {
+//        try{
+//            mainFont = Font.createFont(Font.TRUETYPE_FONT,
+//                    GameScreen.class.getResourceAsStream("/fonts/fontPixelArkanoid.ttf"));
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 
 
     public void paintWindow(Graphics g) {
@@ -89,21 +88,7 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
             }
         }
         bar.pintarSpriteEnMundo(g);
-//        paintTimer(g);
-
     }
-//
-//    private void paintTimer(Graphics g) {
-//        Font f = g.getFont();
-//        Color c = g.getColor();
-//
-//        g.setColor(COLOR_SCORE);
-//        g.setFont(fontTimer);
-//
-//        g.setColor(c);
-//        g.setFont(f);
-//    }
-
 
     /**
      * Método que se utiliza para rellenar el fondo del JPanel.
@@ -119,15 +104,16 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
      * Método para mover todos los Sprites del juego.
      */
     private void moveSprites() {
-        ball.moverSprite(gamePanel.getWidth(), gamePanel.getHeight());
+        ball.moverSprite(gamePanel.getWidth()-20, gamePanel.getHeight()-20);
+        bar.moverSprite();
     }
 
     private void checkCollision() {
         //Comprobar colisiones con el bar
 
         if (ball.colisionan(bar)) {
-            double centerDistance = (ball.getPosX() + ball.getAncho() / 2d) - (bar.getPosX() + LoadImage.WIDTH_BAR_SHIP / 2d);
-            double impactCof = centerDistance / (LoadImage.WIDTH_BAR_SHIP / 2d);
+            double centerDistance = (ball.getPosX() + ball.getAncho() / 2d) - (bar.getPosX() + LoadMedia.WIDTH_BAR_SHIP / 2d);
+            double impactCof = centerDistance / (LoadMedia.WIDTH_BAR_SHIP / 2d);
             double vT = ball.getTotalSpeed();
             double maxAngle = Math.toRadians(60);
             double angle = Math.PI / 2 - maxAngle * Math.abs(impactCof);
@@ -145,9 +131,8 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
             for (int j = 0; j < this.blocks[i].length; j++) {
 
                 if (ball.colisionan(blocks[i][j])) {
+                    totalblock++;
                     gamePanel.getScoreHeader().getScreenActual().addPoint();
-//                    gamePanel.getScoreHeader().repaint();
-
                     Sprite bloque = blocks[i][j];
                     if (Math.abs(ball.getPosX() - bloque.getPosX()) < ((ball.getAncho() + bloque.getAncho()) / 2)) {
                         ball.setVelocidadY(-ball.getVelocidadY());
@@ -178,12 +163,15 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
     public boolean dispatchKeyEvent(KeyEvent e) {
         synchronized (GamePanel.class) {
             getKeyLogic(e);
-            if(keysPressed[0]){
-//                bar.setVelocidadX(bar.getVelocidadX()+5);
-                bar.setPosX(bar.getPosX()-50);
-            }
             if(keysPressed[1]){
-                bar.setPosX(bar.getPosX()+50);
+                bar.setVelocidadX(bar.getVelocidadX()+45);
+            }
+            if(keysPressed[0]){
+                bar.setVelocidadX(bar.getVelocidadX()-45);
+            }
+
+            if(!keysPressed[0] && !keysPressed[1]){
+                bar.setVelocidadX(0);
             }
 
         }
@@ -220,7 +208,7 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
     }
 
     public void moveMouse(MouseEvent e) {
-        bar.setPosX(e.getX() - LoadImage.WIDTH_BAR_SHIP / 2);
+        bar.setPosX(e.getX() - LoadMedia.WIDTH_BAR_SHIP / 2);
         bar.setPosY(gamePanel.getHeight() - 50);
 
     }

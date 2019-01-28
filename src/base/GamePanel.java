@@ -2,6 +2,7 @@ package base;
 
 import screen.IScreen;
 import screen.InitScreen;
+import sprites.LoadMedia;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
     private static final long serialVersionUID = 1L;
     IScreen screenActual;
     ScoreHeader scoreHeader;
+    LoadMedia loadMedia;
 
 
 
@@ -30,7 +32,8 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
      * - Inicia un hilo para actualizar el juego periódicamente.
      * @param scoreHeader
      */
-    public GamePanel(/*ScoreHeader scoreHeader*/ScoreHeader scoreHeader) {
+    public GamePanel(ScoreHeader scoreHeader, LoadMedia loadMedia) {
+        this.loadMedia = loadMedia;
 
         this.addMouseListener(this);
         this.addComponentListener(this);
@@ -135,15 +138,20 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
     }
 
     public void keyPressed(KeyEvent e) {
-        //TODO implementar movimiento con el tecladoç
         this.screenActual.dispatchKeyEvent(e);
-        System.out.println("panel de juego");
-
     }
 
     public void keyReleased(KeyEvent e) {
         this.screenActual.dispatchKeyEvent(e);
 
+    }
+
+    public LoadMedia getLoadMedia() {
+        return loadMedia;
+    }
+
+    public void setLoadMedia(LoadMedia loadMedia) {
+        this.loadMedia = loadMedia;
     }
 
     public ScoreHeader getScoreHeader() {

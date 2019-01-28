@@ -17,7 +17,7 @@ public class BlockGenerator {
     private final static int GRAY_BLOCK = 8;
     private final static int GOLD_BLOCK = 9;
     private final static int NULL_BLOCK = 10;
-    private final static int MAX_BLOCK_HORIZONTAL = 13;
+    private final static int MAX_BLOCK_HORIZONTAL = 12;
     private final static int MAX_BLOCK_VERTICAL = 6;
 
     private BufferedImage[] blockList;

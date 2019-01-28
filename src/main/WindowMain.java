@@ -2,6 +2,7 @@ package main;
 
 import base.GamePanel;
 import base.ScoreHeader;
+import sprites.LoadMedia;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +23,7 @@ public class WindowMain {
 
     public WindowMain() {
         window = new JFrame();
-        window.setBounds(100, 50, 632, 684);
+        window.setBounds(100, 50, 632, 884);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
 
@@ -40,6 +41,7 @@ public class WindowMain {
      * Método que inicializa todos los componentes de la window
      */
     public void initializeComponents() {
+
         window.setLayout(new GridBagLayout());
         GridBagConstraints setting = new GridBagConstraints();
 
@@ -49,7 +51,8 @@ public class WindowMain {
         setting.weighty = 1;
         setting.fill = GridBagConstraints.BOTH;
 
-        scoreHeader = new ScoreHeader();
+        LoadMedia loadMedia = new LoadMedia();
+        scoreHeader = new ScoreHeader(loadMedia);
 //        scoreHeader.setBackground(Color.BLACK);
         window.add(scoreHeader,setting);
 
@@ -59,7 +62,7 @@ public class WindowMain {
         setting.weightx = 1;
         setting.weighty = 10;
         setting.fill = GridBagConstraints.BOTH;
-        gamePanel = new GamePanel(scoreHeader);
+        gamePanel = new GamePanel(scoreHeader, loadMedia);
         window.add(gamePanel,setting);
     }
 }

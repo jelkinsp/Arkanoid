@@ -123,16 +123,18 @@ public class Sprite {
      */
     public void moverSprite(int anchoMundo, int altoMundo) {
 
+
+
         if (posX >= anchoMundo - ancho) { //por la derecha
             velocidadX = -1 * Math.abs(velocidadX);
         }
-        if (posX <= 0) {//por la izquierda
+        if (posX <= 20) {//por la izquierda
             velocidadX = Math.abs(velocidadX);
         }
         if (posY >= altoMundo - alto) {//por abajo
             velocidadY = -1 * Math.abs(velocidadY);
         }
-        if (posY <= 0) { //Por arriba
+        if (posY <= 20) { //Por arriba
             velocidadY = Math.abs(velocidadY);
         }
         posX = posX + velocidadX;
@@ -141,8 +143,16 @@ public class Sprite {
 
 
     public void moverSprite() {
+        if(velocidadX>3){
+            velocidadX=3;
+        }
+
+        if(velocidadX<-3){
+            velocidadX=-3;
+        }
+
         posX = posX + velocidadX;
-        posY = posY + velocidadY;
+//        posY = posY + velocidadY;
     }
 
 
