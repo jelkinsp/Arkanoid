@@ -12,11 +12,12 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 /**
+ *
  * @author Jose Luis Luengo Ramos
  */
 public class GameScreen implements IScreen, KeyEventDispatcher {
-    final int DIFICULT = 55;
-    final int DIFICULT2 = 30;
+    final int DIFFICULT = 55;
+    final int DIFFICULT2 = 30;
 
     GamePanel gamePanel;
     LoadMedia loadMedia;
@@ -120,13 +121,11 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
     private void checkCollisionBlock() {
         for (int i = 0; i < this.blocks.length; i++) {
             for (int j = 0; j < this.blocks[i].length; j++) {
-
                 if (ball.colisionan(blocks[i][j])) {
                     totalblock++;
-                    if (totalblock > DIFICULT2 && totalblock <= 40){
+                    if (totalblock > DIFFICULT2 && totalblock <= 40){
                         ball.setTotalSpeed(ball.getTotalSpeed() + ((ball.getTotalSpeed() / 4) * 0.1));
-
-                    } else if (totalblock > DIFICULT && totalblock <= 60) {
+                    } else if (totalblock > DIFFICULT && totalblock <= 60) {
                         ball.setTotalSpeed(ball.getTotalSpeed() + ((ball.getTotalSpeed() / 3) * 0.1));
                     }
                     gamePanel.getScoreHeader().getScreenActual().addPoint();
