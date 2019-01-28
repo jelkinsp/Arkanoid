@@ -30,19 +30,36 @@ public class ScoreScreen implements IScreen {
 
         score = 0;
 
-        this.mainFont = this.scoreHeader.getLoadMedia().getMainFont().deriveFont(Font.BOLD, 32);
+        this.mainFont = this.scoreHeader.getLoadMedia().getMainFont().deriveFont(Font.BOLD, 28);
     }
 
     @Override
     public void paintWindow(Graphics g) {
+        FontMetrics metrics = g.getFontMetrics(mainFont);
+
+        String word;
+        int x;
+//        int y;
+        g.setFont(mainFont);
+
+
         g.setColor(new Color(0, 0, 0));
         g.fillRect(0, 0, this.scoreHeader.getWidth(), this.scoreHeader.getHeight());
-        g.setFont(mainFont);
         g.setColor(Color.RED);
-        g.drawString("1UP  HIGH SCORE", 50, 35);
+        word = "1UP  HIGH SCORE";
+        x = scoreHeader.getX() + (scoreHeader.getWidth() - metrics.stringWidth(word)) / 2;
+        g.drawString(word, x-50, 35);
+//        g.drawString("1UP  HIGH SCORE", 50, 35);
+
         g.setColor(Color.WHITE);
-        g.drawString(String.valueOf(score), 70, 70);
-        g.drawString(String.valueOf(highScore), 320, 70);
+        word = String.valueOf(score);
+        x = scoreHeader.getX() + (scoreHeader.getWidth() - metrics.stringWidth(word)) / 2;
+        g.drawString(word, x-220, 70);
+        word = String.valueOf(highScore);
+        x = scoreHeader.getX() + (scoreHeader.getWidth() - metrics.stringWidth(word)) / 2;
+        g.drawString(word, x+30, 70);
+//        g.drawString(String.valueOf(score), 70, 70);
+//        g.drawString(String.valueOf(highScore), 320, 70);
         g.dispose();
     }
 

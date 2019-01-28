@@ -47,12 +47,24 @@ public class LoadMedia {
     //Fondo
     public static final int BACKGROUND_POSITION_X = 0;
     public static final int BACKGROUND_POSITION_Y = 0;
-    public static final int BACKGROUND_HEIGHT = 209;
     public static final int BACKGROUND_WIDTH = 175;
+    public static final int BACKGROUND_HEIGHT = 209;
     public final static int SIZE_BETWEEN_BACKGROUND = 11;
+    //Titulo
+    public static final int TITLE_POSITION_X = 0;
+    public static final int TITLE_POSITION_Y = 0;
+    public static final int TITLE_WIDTH = 215;
+    public static final int TITLE_HEIGHT = 49;
+    //Icono
+    public static final int ICON_POSITION_X = 0;
+    public static final int ICON_POSITION_Y = 106;
+    public static final int ICON_WIDTH = 94;
+    public static final int ICON_HEIGHT = 30;
 
 
     private BufferedImage spritesBuffer;
+    private BufferedImage spritesInitBuffer;
+    private BufferedImage[] spritesInitSubBuffer;
     private BufferedImage ballSubBuffer;
     private BufferedImage liveUpSubBuffer;
     private BufferedImage backgroundBuffer;
@@ -63,9 +75,14 @@ public class LoadMedia {
     private Font mainFont;
 
 
+    /**
+     * Constructor para comenzar a cargar las imagenes
+     *
+     */
     public LoadMedia() {
         initializeFont();
         initializeSpritesSubBuffer();
+        initializeSpritesInitSubBuffer();
         initializeBallBuffer();
         initializeBackgroundBuffer();
         initializeShipBuffer();
@@ -74,6 +91,7 @@ public class LoadMedia {
         initializeLiveUpBuffer();
     }
 
+
     private void initializeFont() {
             try {
                 mainFont = Font.createFont(Font.TRUETYPE_FONT,new File("fonts/fontPixelArkanoid.ttf"));
@@ -81,6 +99,25 @@ public class LoadMedia {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+    }
+    private void initializeSpritesInitSubBuffer() {
+        try {
+            this.spritesInitBuffer = ImageIO.read(new File("image/spritesInitGame.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.spritesInitSubBuffer = new BufferedImage[2];
+        this.spritesInitSubBuffer[0] = this.spritesInitBuffer.getSubimage(
+                TITLE_POSITION_X,
+                TITLE_POSITION_Y,
+                TITLE_WIDTH,
+                TITLE_HEIGHT);
+        this.spritesInitSubBuffer[1] = this.spritesInitBuffer.getSubimage(
+                ICON_POSITION_X,
+                ICON_POSITION_Y,
+                ICON_WIDTH,
+                ICON_HEIGHT);
 
     }
 
@@ -174,6 +211,14 @@ public class LoadMedia {
                     WIDTH_BLOCK,
                     HEIGHT_BLOCK);
         }
+    }
+
+    public BufferedImage[] getSpritesInitSubBuffer() {
+        return spritesInitSubBuffer;
+    }
+
+    public void setSpritesInitSubBuffer(BufferedImage[] spritesInitSubBuffer) {
+        this.spritesInitSubBuffer = spritesInitSubBuffer;
     }
 
     public Font getMainFont() {
