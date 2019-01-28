@@ -15,24 +15,21 @@ import java.awt.image.BufferedImage;
  * @author Jose Luis Luengo Ramos
  */
 public class InitScreen implements IScreen {
-//    @FXML
-//    MediaView mediaView;
 
     GamePanel gamePanel;
     Font initFont;
     Color textColor = Color.WHITE;
 
     public InitScreen(GamePanel gamePanel) {
-
         this.gamePanel = gamePanel;
     }
 
-
+    @Override
     public void initWindow() {
         initFont = this.gamePanel.getLoadMedia().getMainFont().deriveFont(Font.PLAIN, 18);
     }
 
-
+    @Override
     public void paintWindow(Graphics g) {
         this.gamePanel.getScoreHeader().getScreenActual().setScore(0);
         BufferedImage title = gamePanel.getLoadMedia().getSpritesInitSubBuffer()[0];
@@ -47,7 +44,6 @@ public class InitScreen implements IScreen {
                 null);
         g.setColor(textColor);
         aligmentText(g);
-
     }
 
     /**
@@ -61,12 +57,10 @@ public class InitScreen implements IScreen {
         String word;
         int x;
         int aux;
-//        int y;
         g.setFont(initFont);
         word = "PUSH";
         x = gamePanel.getX() + (gamePanel.getWidth() - metrics.stringWidth(word)) / 2;
         aux = x;
-//        y = gamePanel.getY() + ((gamePanel.getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
         g.drawString(word, x, 300);
         word = "ONLY 1 PLAYER BUTTON";
         x = gamePanel.getX() + (gamePanel.getWidth() - metrics.stringWidth(word)) / 2;
@@ -86,8 +80,9 @@ public class InitScreen implements IScreen {
 
     }
 
-
+    @Override
     public void executeFrame() {
+//        Cambia el color de un texto segun el fps.
 //        if (contadorColorFrames % CAMBIO_COLOR_INICIO == 0) {
 //
 //            if (textColor.equals(Color.YELLOW)) {
@@ -96,46 +91,18 @@ public class InitScreen implements IScreen {
 //                textColor = Color.YELLOW;
 //            }
 //        }
-
     }
 
-
-    public void moveMouse(MouseEvent e) {
-
-    }
-
-
+    @Override
     public void clickMouse(MouseEvent e) {
-//        playMovie();
         GameScreen gameScreen = new GameScreen(gamePanel);
         gameScreen.initWindow();
         gamePanel.setScreenActual(gameScreen);
 
     }
-// Reproducir un video
-//    public void playMovie() {
-//
-//        String url = "media/initGameVideo.mp4";
-//        Media media = null;
-//            media = new Media(new File(url).getPath());
-//        MediaPlayer mediaPlayer = new MediaPlayer(media);
-//        mediaView.setFitWidth(gamePanel.getWidth());
-//        mediaView.setFitHeight(gamePanel.getHeight());
-////        mediaView.setFitWidth(600);
-////        mediaView.setFitHeight(600);
-//        mediaView.setMediaPlayer(mediaPlayer);
-//        mediaPlayer.play();
-//
-//
-//    }
 
+    @Override
     public void resizeScreen(ComponentEvent e) {
-//        imageScalingStart = bufferedImage.getScaledInstance(gamePanel.getWidth(), gamePanel.getHeight(), Image.SCALE_SMOOTH);
-
-
-    }
-
-    public void keyPressed(KeyEvent e) {
 
     }
 

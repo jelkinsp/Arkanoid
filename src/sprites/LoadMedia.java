@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Esta clase carga todas las imagenes y los tamaños de los sprites
+ * Esta clase carga todas los archivos media y los tamaños de los sprites
  * Se pueden obtener mediante los GETTER.
  *
  * @author : Jose Luis Luengo Ramos
@@ -43,7 +43,6 @@ public class LoadMedia {
     public final static int ORIG_HEIGHT_BAR_SHIP = 8;
     //Distacia entre las nave dentro de la imagen principal
     private final static int SIZE_BETWEEN_BAR_SHIP = 5;
-
     //Fondo
     public static final int BACKGROUND_POSITION_X = 0;
     public static final int BACKGROUND_POSITION_Y = 0;
@@ -81,13 +80,16 @@ public class LoadMedia {
     private BufferedImage[] barShipDestroidSubBuffer;
     private BufferedImage[] blockSubBuffer;
     private Font mainFont;
-
+    private File soundFileStage;
+    private File soundFileBar;
+    private File soundFileBlock;
+    private File soundFileDestroidBar;
 
     /**
      * Constructor para comenzar a cargar las imagenes
-     *
      */
     public LoadMedia() {
+        initializeSound();
         initializeFont();
         initializeSpritesSubBuffer();
         initializeSpritesInitSubBuffer();
@@ -99,16 +101,32 @@ public class LoadMedia {
         initializeLiveUpBuffer();
     }
 
+    /**
+     * Inicializa los sonidos
+     */
+    private void initializeSound() {
+        soundFileStage = new File("media/initThemeStage.wav");
+        soundFileBar = new File("media/collideWithTheBar.wav");
+        soundFileBlock = new File("media/collideWithTheBlock.wav");
+        soundFileDestroidBar = new File("media/destroidBar.wav");
+    }
 
+    /**
+     * Inicializa la fuente
+     */
     private void initializeFont() {
-            try {
-                mainFont = Font.createFont(Font.TRUETYPE_FONT,new File("fonts/fontPixelArkanoid.ttf"));
+        try {
+            mainFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/fontPixelArkanoid.ttf"));
 //                        LoadMedia.class.getResourceAsStream("fonts/fontPixelArkanoid.ttf"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
+
+    /**
+     * Carga las imagenes de la pantalla inicial
+     */
     private void initializeSpritesInitSubBuffer() {
         try {
             this.spritesInitBuffer = ImageIO.read(new File("image/spritesInitGame.png"));
@@ -231,20 +249,33 @@ public class LoadMedia {
         }
     }
 
+    /**
+     * Getter
+     *
+     * @return el archivo media.
+     */
+    public File getSoundFileStage() {
+        return soundFileStage;
+    }
+
+    public File getSoundFileBar() {
+        return soundFileBar;
+    }
+
+    public File getSoundFileBlock() {
+        return soundFileBlock;
+    }
+
+    public File getSoundFileDestroidBar() {
+        return soundFileDestroidBar;
+    }
+
     public BufferedImage[] getSpritesInitSubBuffer() {
         return spritesInitSubBuffer;
     }
 
-    public void setSpritesInitSubBuffer(BufferedImage[] spritesInitSubBuffer) {
-        this.spritesInitSubBuffer = spritesInitSubBuffer;
-    }
-
     public Font getMainFont() {
         return mainFont;
-    }
-
-    public void setMainFont(Font mainFont) {
-        this.mainFont = mainFont;
     }
 
     public static int getHeightBlock() {
@@ -255,28 +286,8 @@ public class LoadMedia {
         return WIDTH_BLOCK;
     }
 
-    public static int getHeightBall() {
-        return HEIGHT_BALL;
-    }
-
-    public static int getWidthBall() {
-        return WIDTH_BALL;
-    }
-
-    public static int getHeightBarShip() {
-        return HEIGHT_BAR_SHIP;
-    }
-
-    public static int getWidthBarShip() {
-        return WIDTH_BAR_SHIP;
-    }
-
     public BufferedImage getBallSubBuffer() {
         return ballSubBuffer;
-    }
-
-    public BufferedImage getLiveUpSubBuffer() {
-        return liveUpSubBuffer;
     }
 
     public BufferedImage[] getBackgroundBuffer() {
@@ -285,10 +296,6 @@ public class LoadMedia {
 
     public BufferedImage[] getBarShipSubBuffer() {
         return barShipSubBuffer;
-    }
-
-    public BufferedImage[] getBarShipDestroidSubBuffer() {
-        return barShipDestroidSubBuffer;
     }
 
     public BufferedImage[] getBlockSubBuffer() {

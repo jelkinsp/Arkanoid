@@ -14,19 +14,15 @@ import java.awt.*;
  */
 public class WindowMain {
 
-
-    //Sigo teniendo la window
     JFrame window;
     GamePanel gamePanel;
     ScoreHeader scoreHeader;
-
 
     public WindowMain() {
         window = new JFrame();
         window.setBounds(100, 50, 632, 884);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-
     }
 
     /**
@@ -41,7 +37,6 @@ public class WindowMain {
      * Método que inicializa todos los componentes de la window
      */
     public void initializeComponents() {
-
         window.setLayout(new GridBagLayout());
         GridBagConstraints setting = new GridBagConstraints();
 
@@ -53,7 +48,6 @@ public class WindowMain {
 
         LoadMedia loadMedia = new LoadMedia();
         scoreHeader = new ScoreHeader(loadMedia);
-//        scoreHeader.setBackground(Color.BLACK);
         window.add(scoreHeader,setting);
 
         setting = new GridBagConstraints();

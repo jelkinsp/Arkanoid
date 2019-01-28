@@ -1,8 +1,11 @@
 package base;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Clase que genera la estructura de los bloques de la partida
+ *
+ */
 public class BlockGenerator {
 
 
@@ -28,13 +31,14 @@ public class BlockGenerator {
     public BlockGenerator(BufferedImage[] blockList) {
         this.blockList = blockList;
         this.blockGameMatrix = new BufferedImage[MAX_BLOCK_HORIZONTAL][MAX_BLOCK_VERTICAL];
-//        this.blockGameMatrix2 = new BufferedImage[MAX_BLOCK_HORIZONTAL][12];
-
         this.blockGameMatrix2 = new BufferedImage[MAX_BLOCK_HORIZONTAL][12];
-
-
     }
 
+    /**
+     * Posicion de los bloques para el 1º nivel
+     *
+     * @return
+     */
     public BufferedImage[][] getStage1() {
         for (int i = 0; i < blockGameMatrix.length; i++) {
             for (int j = 0; j < blockGameMatrix[i].length; j++) {
@@ -58,8 +62,6 @@ public class BlockGenerator {
                         this.blockGameMatrix[i][j] = this.blockList[GREEN_BLOCK];
                         break;
                     default:
-//                        this.blockGameMatrix[i][j] = this.blockList[NULL_BLOCK];
-
                         break;
                 }
             }
@@ -67,6 +69,11 @@ public class BlockGenerator {
         return this.blockGameMatrix;
     }
 
+    /**
+     * Posicion de los bloques para el 2º nivel
+     *
+     * @return
+     */
     public BufferedImage[][] getStage2() {
         for (int i = 0; i < blockGameMatrix2.length; i++) {
             for (int j = i; j < blockGameMatrix2[i].length; j++) {
@@ -153,7 +160,6 @@ public class BlockGenerator {
                         this.blockGameMatrix2[i][j] = this.blockList[RED_BLOCK];
                         break;
                     default:
-//                        this.blockGameMatrix2[i][j] = this.blockList[NULL_BLOCK];
                         break;
                 }
             }
