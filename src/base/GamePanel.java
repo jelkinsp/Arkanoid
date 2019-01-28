@@ -2,6 +2,7 @@ package base;
 
 import screen.IScreen;
 import screen.InitScreen;
+import sprites.LoadMedia;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +16,13 @@ import java.awt.event.*;
  * Implementa Runnable porque en el constructor se lanza un hilo que permite actualizar el Juego periódicamente.
  * Implementa MouseListener para que pueda capturar las pulsaciones del ratón.
  */
-public class GamePanel extends JPanel implements Runnable, MouseListener, ComponentListener, MouseMotionListener {
+public class GamePanel extends JPanel implements Runnable, MouseListener, ComponentListener, MouseMotionListener, KeyListener{
 
     private static final long serialVersionUID = 1L;
-    IScreen IScreenActual;
+    IScreen screenActual;
+    ScoreHeader scoreHeader;
+    LoadMedia loadMedia;
+
 
 
     /**
@@ -26,27 +30,26 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
      * - Inicializa el arrayList de cuadrados.
      * - Asigna el mouse listener que implementa la propia clase para lanazar nuevos cuadrados.
      * - Inicia un hilo para actualizar el juego periódicamente.
+     * @param scoreHeader
      */
-    public GamePanel() {
+    public GamePanel(ScoreHeader scoreHeader, LoadMedia loadMedia) {
+        this.loadMedia = loadMedia;
 
         this.addMouseListener(this);
         this.addComponentListener(this);
         this.addMouseMotionListener(this);
+        this.addKeyListener(this);
         new Thread(this).start();
+        this.scoreHeader = scoreHeader;
 
-        IScreenActual = new InitScreen(this);
-        IScreenActual.initWindow();
+        this.setFocusable(true);
 
+        this.screenActual = new InitScreen(this);
+        this.screenActual.initWindow();
     }
 
-
-    public IScreen getIScreenActual() {
-        return IScreenActual;
-    }
-
-
-    public void setIScreenActual(IScreen IScreenActual) {
-        this.IScreenActual = IScreenActual;
+    public void setScreenActual(IScreen screenActual) {
+        this.screenActual = screenActual;
     }
 
 
@@ -58,23 +61,29 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
      */
 
     public void paintComponent(Graphics g) {
-        IScreenActual.paintWindow(g);
+        screenActual.paintWindow(g);
+        this.scoreHeader.repaint();
     }
 
     public void run() {
-
+            scoreHeader.getScreenActual().readFile();
         while (true) {
 
-                repaint();
 
             try {
                 Thread.sleep(16);
+//                Thread.sleep(60);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            screenActual.executeFrame();
 
-
-            IScreenActual.executeFrame();
+            if(scoreHeader.getScreenActual().getScore() >= scoreHeader.getScreenActual().getHighScore()) {
+                scoreHeader.getScreenActual().setHighScore(scoreHeader.getScreenActual().getScore());
+                //todo pasar la escritura del score maximo a fichero al finalizar la partida
+//                scoreHeader.getScreenActual().writeFile();
+            }
+            repaint();
             Toolkit.getDefaultToolkit().sync();
         }
     }
@@ -84,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
     }
 
     public void mousePressed(MouseEvent e) {
-        IScreenActual.clickMouse(e);
+        screenActual.clickMouse(e);
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -100,7 +109,7 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
     }
 
     public void componentResized(ComponentEvent e) {
-        IScreenActual.resizeScreen(e);
+        screenActual.resizeScreen(e);
     }
 
     public void componentMoved(ComponentEvent e) {
@@ -120,8 +129,36 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
     }
 
     public void mouseMoved(MouseEvent e) {
-        IScreenActual.moveMouse(e);
+//        screenActual.moveMouse(e);
     }
+
+
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    public void keyPressed(KeyEvent e) {
+        this.screenActual.dispatchKeyEvent(e);
+    }
+
+    public void keyReleased(KeyEvent e) {
+        this.screenActual.dispatchKeyEvent(e);
+
+    }
+
+    public LoadMedia getLoadMedia() {
+        return loadMedia;
+    }
+
+    public void setLoadMedia(LoadMedia loadMedia) {
+        this.loadMedia = loadMedia;
+    }
+
+    public ScoreHeader getScoreHeader() {
+        return scoreHeader;
+    }
+
+
 }
 
 

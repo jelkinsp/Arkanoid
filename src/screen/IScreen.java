@@ -2,6 +2,7 @@ package screen;
 
 import java.awt.*;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
@@ -15,5 +16,8 @@ public interface IScreen {
 	void moveMouse(MouseEvent e);
 	void clickMouse(MouseEvent e);
 	void resizeScreen(ComponentEvent e);
+	void keyPressed(KeyEvent e);
+	boolean dispatchKeyEvent(KeyEvent e);
+
 	
 }
