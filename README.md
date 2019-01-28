@@ -12,13 +12,13 @@ desarrolladas en la
 FP.Superior **Desarrollo De aplicaciones Multiplataforma.**
 ***
 
-###News
+### News
 
-###**V1.15.0**
+### **V1.15.0**
 
 Implementados los sonidos del juego.
 
-###**V1.5.0**
+### **V1.5.0**
 
 Implementación radianes para el calculo de las direcciones y el control de la bola
 
@@ -43,7 +43,7 @@ Implementación radianes para el calculo de las direcciones y el control de la b
 ***
 
 
-###Change Log
+### Change Log
 **v1.15.0**
 
 * -Implementados los sonidos del juego.
