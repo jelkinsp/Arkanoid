@@ -43,7 +43,7 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
 
 
     public void initWindow() {
-        this.totalblock=0;
+        this.totalblock = 0;
         this.blockList = new BlockGenerator(this.loadMedia.getBlockSubBuffer());
         this.blocks = new Sprite[12][6];
         this.blockImageStage = this.blockList.getStage1();
@@ -57,8 +57,8 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
                 blocks[i][j] = new Sprite(
                         loadMedia.getWidthBlock() * 3,
                         loadMedia.getHeightBlock() * 3,
-                        ((loadMedia.getWidthBlock() * 3) * i)+23,
-                        ((loadMedia.getHeightBlock() * 3) * j)+96,
+                        ((loadMedia.getWidthBlock() * 3) * i) + 23,
+                        ((loadMedia.getHeightBlock() * 3) * j) + 96,
                         this.blockImageStage[i][j]);
             }
         }
@@ -104,7 +104,7 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
      * Método para mover todos los Sprites del juego.
      */
     private void moveSprites() {
-        ball.moverSprite(gamePanel.getWidth()-20, gamePanel.getHeight()-20);
+        ball.moverSprite(gamePanel.getWidth() - 20, gamePanel.getHeight() - 20);
         bar.moverSprite();
     }
 
@@ -163,14 +163,23 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
     public boolean dispatchKeyEvent(KeyEvent e) {
         synchronized (GamePanel.class) {
             getKeyLogic(e);
-            if(keysPressed[1]){
-                bar.setVelocidadX(bar.getVelocidadX()+45);
+            if (keysPressed[1]) {
+                if (bar.getPosX() + LoadMedia.ORIG_WIDTH_BAR_SHIP < gamePanel.getWidth() - 90) {
+                    bar.setVelocidadX(bar.getVelocidadX() + 45);
+                } else {
+                    bar.setVelocidadX(0);
+                }
             }
-            if(keysPressed[0]){
-                bar.setVelocidadX(bar.getVelocidadX()-45);
+            if (keysPressed[0]) {
+                if (bar.getPosX() > 25) {
+                    bar.setVelocidadX(bar.getVelocidadX() - 45);
+                } else {
+                    bar.setVelocidadX(0);
+
+                }
             }
 
-            if(!keysPressed[0] && !keysPressed[1]){
+            if (!keysPressed[0] && !keysPressed[1]) {
                 bar.setVelocidadX(0);
             }
 
@@ -185,21 +194,21 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
                 keyCode = e.getKeyCode();
                 switch (keyCode) {
                     case KeyEvent.VK_A:
-                        keysPressed[0]=true;
+                        keysPressed[0] = true;
                         break;
                     case KeyEvent.VK_D:
-                        keysPressed[1]=true;
+                        keysPressed[1] = true;
                         break;
                 }
                 break;
             case KeyEvent.KEY_RELEASED:
                 keyCode = e.getKeyCode();
-                switch (keyCode){
+                switch (keyCode) {
                     case KeyEvent.VK_A:
-                        keysPressed[0]=false;
+                        keysPressed[0] = false;
                         break;
                     case KeyEvent.VK_D:
-                        keysPressed[1]=false;
+                        keysPressed[1] = false;
                         break;
                 }
 
@@ -234,7 +243,6 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
     private void rescaleImage() {
         imageScaling = bufferedImage.getScaledInstance(gamePanel.getWidth(), gamePanel.getHeight(), Image.SCALE_SMOOTH);
     }
-
 
 
 }

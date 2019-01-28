@@ -45,11 +45,11 @@ public class LoadMedia {
     private final static int SIZE_BETWEEN_BAR_SHIP = 5;
 
     //Fondo
-    private static final int BACKGROUND_POSITION_X = 0;
-    private static final int BACKGROUND_POSITION_Y = 0;
-    private static final int BACKGROUND_HEIGHT = 209;
-    private static final int BACKGROUND_WIDTH = 175;
-    private final static int SIZE_BETWEEN_BACKGROUND_SHIP = 11;
+    public static final int BACKGROUND_POSITION_X = 0;
+    public static final int BACKGROUND_POSITION_Y = 0;
+    public static final int BACKGROUND_HEIGHT = 209;
+    public static final int BACKGROUND_WIDTH = 175;
+    public final static int SIZE_BETWEEN_BACKGROUND = 11;
 
 
     private BufferedImage spritesBuffer;
@@ -122,7 +122,7 @@ public class LoadMedia {
 
         for (int i = 0; i < this.backgroundSubBuffer.length; i++) {
             this.backgroundSubBuffer[i] = this.backgroundBuffer.getSubimage(
-                    BACKGROUND_POSITION_X + ((SIZE_BETWEEN_BACKGROUND_SHIP + BACKGROUND_WIDTH) * i),
+                    BACKGROUND_POSITION_X + ((SIZE_BETWEEN_BACKGROUND + BACKGROUND_WIDTH) * i),
                     BACKGROUND_POSITION_Y,
                     BACKGROUND_WIDTH,
                     BACKGROUND_HEIGHT);
