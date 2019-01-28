@@ -60,6 +60,14 @@ public class LoadMedia {
     public static final int ICON_POSITION_Y = 106;
     public static final int ICON_WIDTH = 94;
     public static final int ICON_HEIGHT = 30;
+    public static final int GAME_OVER_POSITION_X = 0;
+    public static final int GAME_OVER_POSITION_Y = 52;
+    public static final int GAME_OVER_WIDTH = 144;
+    public static final int GAME_OVER_HEIGHT = 17;
+    public static final int CONTINUE_POSITION_X = 0;
+    public static final int CONTINUE_POSITION_Y = 72;
+    public static final int CONTINUE_WIDTH = 131;
+    public static final int CONTINUE_HEIGHT = 14;
 
 
     private BufferedImage spritesBuffer;
@@ -107,7 +115,7 @@ public class LoadMedia {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.spritesInitSubBuffer = new BufferedImage[2];
+        this.spritesInitSubBuffer = new BufferedImage[4];
         this.spritesInitSubBuffer[0] = this.spritesInitBuffer.getSubimage(
                 TITLE_POSITION_X,
                 TITLE_POSITION_Y,
@@ -118,6 +126,16 @@ public class LoadMedia {
                 ICON_POSITION_Y,
                 ICON_WIDTH,
                 ICON_HEIGHT);
+        this.spritesInitSubBuffer[2] = this.spritesInitBuffer.getSubimage(
+                GAME_OVER_POSITION_X,
+                GAME_OVER_POSITION_Y,
+                GAME_OVER_WIDTH,
+                GAME_OVER_HEIGHT);
+        this.spritesInitSubBuffer[3] = this.spritesInitBuffer.getSubimage(
+                CONTINUE_POSITION_X,
+                CONTINUE_POSITION_Y,
+                CONTINUE_WIDTH,
+                CONTINUE_HEIGHT);
 
     }
 

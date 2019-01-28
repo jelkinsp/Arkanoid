@@ -48,16 +48,16 @@ public class ScoreScreen implements IScreen {
         g.setColor(Color.RED);
         word = "1UP  HIGH SCORE";
         x = scoreHeader.getX() + (scoreHeader.getWidth() - metrics.stringWidth(word)) / 2;
-        g.drawString(word, x-50, 35);
+        g.drawString(word, x - 50, 35);
 //        g.drawString("1UP  HIGH SCORE", 50, 35);
 
         g.setColor(Color.WHITE);
         word = String.valueOf(score);
         x = scoreHeader.getX() + (scoreHeader.getWidth() - metrics.stringWidth(word)) / 2;
-        g.drawString(word, x-220, 70);
+        g.drawString(word, x - 220, 70);
         word = String.valueOf(highScore);
         x = scoreHeader.getX() + (scoreHeader.getWidth() - metrics.stringWidth(word)) / 2;
-        g.drawString(word, x+30, 70);
+        g.drawString(word, x + 30, 70);
 //        g.drawString(String.valueOf(score), 70, 70);
 //        g.drawString(String.valueOf(highScore), 320, 70);
         g.dispose();
@@ -114,15 +114,16 @@ public class ScoreScreen implements IScreen {
     }
 
     public void writeFile() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("saveScore/highScore.txt"))) {
-            writer.println(this.highScore);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (this.highScore <= this.score) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("saveScore/highScore.txt"))) {
+                writer.println(this.score);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-
 
 
     public int getHighScore() {

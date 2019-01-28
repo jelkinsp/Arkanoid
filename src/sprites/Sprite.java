@@ -110,7 +110,7 @@ public class Sprite {
      * @param anchoMundo ancho del mundo sobre el que se mueve el Sprite
      * @param altoMundo  alto del mundo sobre el que se mueve el Sprite
      */
-    public void moverSprite(int anchoMundo, int altoMundo) {
+    public boolean moverSprite(int anchoMundo, int altoMundo) {
 
 
 
@@ -128,16 +128,22 @@ public class Sprite {
         }
         posX = posX + velocidadX;
         posY = posY + velocidadY;
+
+        if(posY > altoMundo-20){
+            return true;
+        }
+
+        return false;
     }
 
 
     public void moverSprite() {
-        if(velocidadX>3){
-            velocidadX=3;
+        if(velocidadX>5){
+            velocidadX=5;
         }
 
-        if(velocidadX<-3){
-            velocidadX=-3;
+        if(velocidadX<-5){
+            velocidadX=-5;
         }
 
         posX = posX + velocidadX;
@@ -216,6 +222,7 @@ public class Sprite {
     }
 
     public void setVelocidadX(double velocidadX) {
+
         this.velocidadX = velocidadX;
     }
 
@@ -232,8 +239,6 @@ public class Sprite {
     public void setColor(Color color) {
         this.color = color;
         actualizarBuffer();
-
-
     }
 
 

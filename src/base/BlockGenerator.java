@@ -22,11 +22,17 @@ public class BlockGenerator {
 
     private BufferedImage[] blockList;
     private BufferedImage blockGameMatrix[][];
+    private BufferedImage blockGameMatrix2[][];
 
 
     public BlockGenerator(BufferedImage[] blockList) {
         this.blockList = blockList;
         this.blockGameMatrix = new BufferedImage[MAX_BLOCK_HORIZONTAL][MAX_BLOCK_VERTICAL];
+//        this.blockGameMatrix2 = new BufferedImage[MAX_BLOCK_HORIZONTAL][12];
+
+        this.blockGameMatrix2 = new BufferedImage[MAX_BLOCK_HORIZONTAL][12];
+
+
     }
 
     public BufferedImage[][] getStage1() {
@@ -53,11 +59,106 @@ public class BlockGenerator {
                         break;
                     default:
 //                        this.blockGameMatrix[i][j] = this.blockList[NULL_BLOCK];
+
                         break;
                 }
             }
         }
         return this.blockGameMatrix;
+    }
+
+    public BufferedImage[][] getStage2() {
+        for (int i = 0; i < blockGameMatrix2.length; i++) {
+            for (int j = i; j < blockGameMatrix2[i].length; j++) {
+                switch (i) {
+                    case 0:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[WHITE_BLOCK];
+                        }
+                        break;
+                    case 1:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[ORANGE_BLOCK];
+                        }
+                        break;
+                    case 2:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[CIAN_BLOCK];
+                        }
+                        break;
+                    case 3:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[GREEN_BLOCK];
+                        }
+                        break;
+                    case 4:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[RED_BLOCK];
+                        }
+                        break;
+                    case 5:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[BLUE_BLOCK];
+                        }
+                        break;
+                    case 6:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[PINK_BLOCK];
+                        }
+                        break;
+                    case 7:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[WHITE_BLOCK];
+                        }
+                        break;
+                    case 8:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[ORANGE_BLOCK];
+                        }
+                        break;
+                    case 9:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[CIAN_BLOCK];
+                        }
+                        break;
+                    case 10:
+                        if (j == blockGameMatrix2.length - 1) {
+                            this.blockGameMatrix2[i][j] = this.blockList[GRAY_BLOCK];
+                        } else {
+                            this.blockGameMatrix2[i][j] = this.blockList[GREEN_BLOCK];
+                        }
+                        break;
+                    case 11:
+
+                        this.blockGameMatrix2[i][j] = this.blockList[RED_BLOCK];
+                        break;
+                    default:
+//                        this.blockGameMatrix2[i][j] = this.blockList[NULL_BLOCK];
+                        break;
+                }
+            }
+        }
+        return this.blockGameMatrix2;
     }
 
 }

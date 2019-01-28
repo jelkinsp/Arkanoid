@@ -71,18 +71,13 @@ public class GamePanel extends JPanel implements Runnable, MouseListener, Compon
 
 
             try {
-                Thread.sleep(16);
+                Thread.sleep(10);
 //                Thread.sleep(60);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             screenActual.executeFrame();
 
-            if(scoreHeader.getScreenActual().getScore() >= scoreHeader.getScreenActual().getHighScore()) {
-                scoreHeader.getScreenActual().setHighScore(scoreHeader.getScreenActual().getScore());
-                //todo pasar la escritura del score maximo a fichero al finalizar la partida
-//                scoreHeader.getScreenActual().writeFile();
-            }
             repaint();
             Toolkit.getDefaultToolkit().sync();
         }
