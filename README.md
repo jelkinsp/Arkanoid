@@ -51,6 +51,8 @@ Implementación radianes para el calculo de las direcciones y el control de la b
   -Rellenado el README, posibles modificaciones futuras.
 
   -Cambio de formato con el audio
+  
+  -Refactorizado superficial.
 
 **v1.10.0**
 * Parcheado el cheque de la barra con las paredes.
