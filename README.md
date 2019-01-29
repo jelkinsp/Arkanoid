@@ -1,5 +1,5 @@
 ﻿# Arkanoid
-Arkanoid **V1.15.0**
+Arkanoid **V1.17.0**
 
 ***
 *Clasico Juego Arkanoid.*
