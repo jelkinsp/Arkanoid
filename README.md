@@ -1,5 +1,5 @@
 ﻿# Arkanoid
-Arkanoid **V1.15.0**
+Arkanoid **V1.17.0**
 
 ***
 *Clasico Juego Arkanoid.*
@@ -20,7 +20,7 @@ Implementados los sonidos del juego.
 
 ### **V1.5.0**
 
-Implementación radianes para el calculo de las direcciones y el control de la bola
+Implementación de las direcciones y el control de la bola.
 
 ![](http://centros5.pntic.mec.es/ies.de.melilla/img_2/trrig_graf_02.gif)
 
