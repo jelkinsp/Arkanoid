@@ -1,5 +1,5 @@
 ﻿# Arkanoid
-Arkanoid **V1.17.0**
+Arkanoid **V1.18.0**
 
 ***
 *Clasico Juego Arkanoid.*
@@ -17,7 +17,7 @@ Control de la barra hacia la derecha `D`
 
 Control de la barra hacia la Izquierda: `A`
 
-## News
+## **News**
 
 ### **V1.15.0**
 
@@ -51,6 +51,8 @@ Implementación de las direcciones y el control de la bola.
 ### Change Log
 
 **v1.18.0**
+
+* Actualizada información README.
 
 * Arreglos en los sonidos, y añadidos a gitignore
 
