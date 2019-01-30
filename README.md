@@ -8,11 +8,16 @@ Consiste en rompero todos lo bloque sin que la bola caiga al vacio.
  
 El objetivo del proyecto es la puesta en practica de los conocimientos aprendidos en actividades anteriores
 desarrolladas en la 
-
 FP.Superior **Desarrollo De aplicaciones Multiplataforma.**
-***
 
-### News
+***
+## **Controles**
+
+Control de la barra hacia la derecha `D`
+
+Control de la barra hacia la Izquierda: `A`
+
+## News
 
 ### **V1.15.0**
 
@@ -44,6 +49,19 @@ Implementación de las direcciones y el control de la bola.
 
 
 ### Change Log
+
+**v1.18.0**
+
+* Arreglos en los sonidos, y añadidos a gitignore
+
+**v1.17.0**
+
+* Arreglos en la explicacion del readme
+
+**v1.16.0**
+
+* Arreglos gitignore para eclipes
+
 **v1.15.0**
 
 * -Implementados los sonidos del juego.
