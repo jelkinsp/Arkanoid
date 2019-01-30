@@ -26,7 +26,10 @@ hs_err_pid*
 #JetBrain
 .idea/
 *.iml
+
+#Eclipse
+out/
 /.classpath
 /.project
-/Arkanoid.eml
-/Arkanoid.userlibraries
+/*.eml
+/*.userlibraries

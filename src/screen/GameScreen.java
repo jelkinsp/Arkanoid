@@ -204,6 +204,8 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
      */
     private void checkLose() {
         if (this.ground) {
+            soundClip.close();
+
             initSound(loadMedia.getSoundFileDestroidBar());
             soundClip.start();
             GameOverScreen gameOver = new GameOverScreen(gamePanel);
@@ -218,6 +220,7 @@ public class GameScreen implements IScreen, KeyEventDispatcher {
      */
     private void checkWin() {
         if (totalblock > 71) {
+            soundClip.close();
             initSound(loadMedia.getSoundFileStage());
             soundClip.start();
             GameScreen2 gameScreen = new GameScreen2(gamePanel);
